@@ -31,7 +31,6 @@ public:
 			}
 		}
 
-		// Free handle
 		if (snapShot)
 			::CloseHandle(snapShot);
 	}
