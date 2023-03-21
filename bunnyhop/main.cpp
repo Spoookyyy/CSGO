@@ -12,9 +12,16 @@ namespace offsets
 
 int main()
 {
+
+	const auto JUMP_KEY = VK_SPACE; // EDIT JUMP KEY
+
+	bool isJumping = false;
+
 	const auto memory = Memory("csgo.exe");
 
 	const auto client = memory.GetModuleAddress("client.dll");
+
+
 
 	while (true)
 	{
@@ -26,11 +33,21 @@ int main()
 		
 		const auto onGround = memory.Read<bool>(localPlayer + offsets::m_fFlags);
 
-		if (GetAsyncKeyState(VK_SPACE) && onGround & (1 << 0)) {
+		if (GetAsyncKeyState(JUMP_KEY)) {
+			if (isJumping) {
+				isJumping = false;
+			}
+			else {
+				isJumping = true;
+			}
+		};
 
+		
+
+		if (isJumping) {
 			memory.Write<BYTE>(client + offsets::dwForceJump, 6);
-
 		}
+		
 	}
 
 }
