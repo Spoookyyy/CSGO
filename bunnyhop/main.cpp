@@ -35,10 +35,10 @@ int main()
 
 		if (GetAsyncKeyState(JUMP_KEY)) {
 			if (isJumping) {
-				isJumping = false;
+				isJumping = !isJumping;
 			}
 			else {
-				isJumping = true;
+				isJumping = !isJumping;
 			}
 		};
 
